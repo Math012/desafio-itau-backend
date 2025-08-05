@@ -3,6 +3,7 @@ package com.math012.desafio_itau_backend.business;
 import com.math012.desafio_itau_backend.business.converter.TransactionConverter;
 import com.math012.desafio_itau_backend.business.dto.request.TransactionRequestDTO;
 import com.math012.desafio_itau_backend.infra.entity.TransactionEntity;
+import com.math012.desafio_itau_backend.infra.entity.TransactionStatisticsEntity;
 import com.math012.desafio_itau_backend.infra.exception.RequestInvalidException;
 import com.math012.desafio_itau_backend.infra.exception.TransactionDateException;
 import com.math012.desafio_itau_backend.infra.exception.TransactionValueException;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.DoubleSummaryStatistics;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -37,6 +40,16 @@ public class TransactionService {
 
     public void deleteAll(){
         repository.deleteAll();
+    }
+
+    public TransactionStatisticsEntity transactionStatistics(){
+        var listTransactionsMadeInLastMinute = repository.findByTime();
+        DoubleSummaryStatistics dSS = listTransactionsMadeInLastMinute.stream().collect(Collectors.summarizingDouble(TransactionEntity::getValor));
+        if (!listTransactionsMadeInLastMinute.isEmpty()){
+            return new TransactionStatisticsEntity(dSS.getCount(),dSS.getSum(),dSS.getAverage(),dSS.getMin(),dSS.getMax());
+        }else {
+            return new TransactionStatisticsEntity(0,0,0,0,0);
+        }
     }
 
     public void verifyTransaction(TransactionRequestDTO dto){
