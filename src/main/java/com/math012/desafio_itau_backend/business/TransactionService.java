@@ -35,6 +35,10 @@ public class TransactionService {
         }
     }
 
+    public void deleteAll(){
+        repository.deleteAll();
+    }
+
     public void verifyTransaction(TransactionRequestDTO dto){
         if (!dto.getDataHora().isBefore(OffsetDateTime.now())){
             throw new TransactionDateException("Erro ao registrar a transação: data inválida!");
