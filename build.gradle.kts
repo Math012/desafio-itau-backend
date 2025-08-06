@@ -2,7 +2,10 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.5.4"
 	id("io.spring.dependency-management") version "1.1.7"
+	application
 }
+
+
 
 group = "com.math012"
 version = "0.0.1-SNAPSHOT"
@@ -26,6 +29,7 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.slf4j:slf4j-api:2.0.17")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -35,3 +39,9 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+application{
+	mainClass = "com.math012.desafio_itau_backend.DesafioItauBackendApplication"
+}
+
+
