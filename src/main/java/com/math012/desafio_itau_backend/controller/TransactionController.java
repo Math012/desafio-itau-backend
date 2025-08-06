@@ -31,4 +31,9 @@ public class TransactionController {
     public ResponseEntity<TransactionStatisticsEntity> transactionStatistics(){
         return ResponseEntity.ok(service.transactionStatistics());
     }
+
+    @GetMapping("/estatistica/{time}")
+    public ResponseEntity<TransactionStatisticsEntity> transactionStatistics(@PathVariable("time") Long time){
+        return ResponseEntity.ok(service.transactionStatisticsAdapter(time));
+    }
 }

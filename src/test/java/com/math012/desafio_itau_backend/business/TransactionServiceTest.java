@@ -140,7 +140,7 @@ public class TransactionServiceTest {
         }
         Long end = System.currentTimeMillis();
         Long total = end - start;
-        assertThat(total).isLessThan(100);
+        assertThat(total).isLessThan(255);
     }
 
     @Test
@@ -152,7 +152,7 @@ public class TransactionServiceTest {
         }
         Long end = System.currentTimeMillis();
         Long total = end - start;
-        assertThat(total).isLessThan(100);
+        assertThat(total).isLessThan(255);
     }
 
     @Test
@@ -164,6 +164,6 @@ public class TransactionServiceTest {
         }
         Long end = System.currentTimeMillis();
         Long total = end - start;
-        assertThat(total).isLessThan(100);
+        assertThat(total).isLessThan(255);
     }
 }

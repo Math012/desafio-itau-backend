@@ -13,4 +13,6 @@ public interface TransactionRepository {
     void deleteAll();
 
     List<TransactionEntity> findByTime();
+
+    List<TransactionEntity> findByTimeAdapter(Long time);
 }

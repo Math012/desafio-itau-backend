@@ -64,6 +64,19 @@ public class TransactionService {
         }
     }
 
+    public TransactionStatisticsEntity transactionStatisticsAdapter(Long time) {
+        logger.info("transactionStatisticsAdapter: recebendo a lista de transações por periado");
+        var listTransactionsMadeInLastMinute = repository.findByTimeAdapter(time);
+        DoubleSummaryStatistics dSS = listTransactionsMadeInLastMinute.stream().collect(Collectors.summarizingDouble(TransactionEntity::getValor));
+        if (!listTransactionsMadeInLastMinute.isEmpty()) {
+            logger.info("transactionStatisticsAdapter: Lista encontrada calculando as estatísticas das transações");
+            return new TransactionStatisticsEntity(dSS.getCount(), dSS.getSum(), dSS.getAverage(), dSS.getMin(), dSS.getMax());
+        } else {
+            logger.info("transactionStatisticsAdapter: Lista não encontrada, definindo as estatísticas para o valor 0");
+            return new TransactionStatisticsEntity(0, 0, 0, 0, 0);
+        }
+    }
+
     public void verifyTransaction(TransactionRequestDTO dto) {
         if (!dto.getDataHora().isBefore(OffsetDateTime.now())) {
             logger.info("verifyTransaction: Erro encontrado ao tentar salva a transação com data inválida");
