@@ -1,11 +1,43 @@
+# Tópicos realizados:
 
-# desafio-itau-backend
+✅ Endpoints: 
+  - POST /transacao 
+  - DELETE /transacao
+  - GET /estatistica
+  - GET /estatistica{time} (consulta de estatísticas por tempo informado)
+    
+✅ Respostas da aplicação:
+  - 200 OK
+  - 201 Created
+  - 422 Unprocessable Entity
+  - 400 Bad Request
 
-# Itaú Unibanco - Desafio de Programação
+✅ Armazenar todos os dados em memória
+
+✅ Aceitar e responder apenas com JSON
+    
+✅ Testes unitários
+ 
+✅ Containerização
+ 
+✅ Logs
+ 
+✅ Performance
+ 
+✅ Tratamento de Erros
+
+✅ Documentação da API Com Swagger (http://localhost:8080/swagger-ui/index.html#)
+ 
+✅ Configurações:
+ - Você consegue deixar sua aplicação configurável em relação a quantidade de segundos para calcular as estatísticas? Por exemplo: o padrão é 60 segundos, mas e se o usuário quiser 120 segundos?
+
+## desafio-itau-backend
+
+## Itaú Unibanco - Desafio de Programação
 
 Este é um desafio bacana tanto de desenvolvimento de software quanto de engenharia de software. Queremos testar sua capacidade de construir um software com várias partes diferentes funcionando em conjunto!
 
-## 1. Introdução
+### 1. Introdução
 
 Sua missão, caso você aceite, é criar uma API REST que recebe Transações e retorna Estatísticas sob essas transações. Para este desafio, a API deve ser criada utilizando-se de Java ou [Kotlin](https://kotlinlang.org/) e Spring Boot.
 
@@ -13,11 +45,11 @@ Um bom lugar para se começar é o [Spring Starter](https://start.spring.io/).
 
 >**Dica:** Não existe uma forma certa ou errada de resolver o desafio! Vamos avaliar coisas como a qualidade do seu código, o quão fácil é de compreender o código, organização do projeto, quantidade e qualidade dos testes, preocupação com segurança e vários outros fatores :)
 
-## 2. Definição do desafio
+### 2. Definição do desafio
 
 Neste desafio você deve **criar uma API REST** no [GitHub](https://github.com/) ou [GitLab](https://gitlab.com/). **Leia com atenção todas as instruções a seguir!**
 
-### 2.1. Restrições Técnicas
+#### 2.1. Restrições Técnicas
 
 Seu projeto:
 
@@ -37,11 +69,11 @@ Seu projeto:
 
 >**Atenção!** Por motivos de segurança, não podemos aceitar projetos enviados como arquivos. Você **DEVE** disponibilizar seu projeto publicamente para que possamos acessá-lo e corrigi-lo! Após receber uma resposta de nós, sinta-se livre para tornar seu projeto **privado** :)
 
-### 2.2. Endpoints da API
+#### 2.2. Endpoints da API
 
 A seguir serão especificados os endpoints que devem estar presentes na sua API e a funcionalidade esperada de cada um deles.
 
-#### 2.2.1. Receber Transações: `POST /transacao`
+##### 2.2.1. Receber Transações: `POST /transacao`
 
 Este é o endpoint que irá receber as Transações. Cada transação consiste de um `valor` e uma `dataHora` de quando ela aconteceu:
 
@@ -78,7 +110,7 @@ Como resposta, espera-se que este endpoint responda com:
 - `400 Bad Request` sem nenhum corpo
   - A API não compreendeu a requisição do cliente (por exemplo: um JSON inválido)
 
-#### 2.2.2. Limpar Transações: `DELETE /transacao`
+##### 2.2.2. Limpar Transações: `DELETE /transacao`
 
 Este endpoint simplesmente **apaga todos os dados de transações** que estejam armazenados.
 
@@ -87,7 +119,7 @@ Como resposta, espera-se que este endpoint responda com:
 - `200 OK` sem nenhum corpo
   - Todas as informações foram apagadas com sucesso
 
-#### 2.2.3. Calcular Estatísticas: `GET /estatistica`
+##### 2.2.3. Calcular Estatísticas: `GET /estatistica`
 
 Este endpoint deve retornar estatísticas das transações que **aconteceram nos últimos 60 segundos (1 minuto)**. As estatísticas que devem ser calculadas são:
 
@@ -119,7 +151,7 @@ Como resposta, espera-se que este endpoint responda com:
   - Um JSON com os campos `count`, `sum`, `avg`, `min` e `max` todos preenchidos com seus respectivos valores
   - **Atenção!** Quando não houverem transações nos últimos 60 segundos considere todos os valores como `0` (zero)
 
-## 4. Extras
+### 4. Extras
 
 Vamos propôr a seguir alguns desafios extras caso você queira testar seus conhecimentos ao máximo! Nenhum desses requisitos é obrigatório, mas são desejados e podem ser um diferencial!
 
