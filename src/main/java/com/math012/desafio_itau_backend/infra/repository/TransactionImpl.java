@@ -49,4 +49,23 @@ public class TransactionImpl implements TransactionRepository {
         logger.info("repository: Retornando a lista de transações");
         return transactionsSelectedByPeriod;
     }
+
+    @Override
+    public List<TransactionEntity> findByTimeAdapter(Long time) {
+        List<TransactionEntity> transactionsSelectedByPeriod = new ArrayList<>();
+        logger.info("findByTimeAdapter: Definindo hora de inicio da transação: {}", time);
+        OffsetDateTime timeStart = OffsetDateTime.now().minusSeconds(time);
+        logger.info("findByTimeAdapter: Definindo hora final da transação");
+        OffsetDateTime timeEnd = OffsetDateTime.now();
+        logger.info("findByTimeAdapter: Buscando transações dentro do periado");
+        for (TransactionEntity entity : allTransactions) {
+            if (entity.getDataHora().isAfter(timeStart) || entity.getDataHora().equals(timeStart) && entity.getDataHora().isBefore(timeEnd) || entity.getDataHora().equals(timeEnd)) {
+                logger.info("findByTimeAdapter: Transação encontrada");
+                transactionsSelectedByPeriod.add(entity);
+                logger.info("findByTimeAdapter: Transações adicionadas a lista de transações por periado");
+            }
+        }
+        logger.info("findByTimeAdapter: Retornando a lista de transações");
+        return transactionsSelectedByPeriod;
+    }
 }
